@@ -83,14 +83,10 @@ app.put("/todos/:id", checksExistsUserAccount, (request, response) => {
     });
   }
 
-  const todoIndex = user.todos.findIndex((todo) => todo.id == id);
+  todo.title = title;
+  todo.deadline = deadline;
 
-  user.todos[todoIndex].title = title;
-  user.todos[todoIndex].deadline = deadline;
-
-  const newTodo = user.todos.find((todo) => todo.id == id);
-
-  return response.status(201).json(newTodo);
+  return response.status(201).json(todo);
 });
 
 app.patch("/todos/:id/done", checksExistsUserAccount, (request, response) => {
@@ -105,13 +101,9 @@ app.patch("/todos/:id/done", checksExistsUserAccount, (request, response) => {
     });
   }
 
-  const todoIndex = user.todos.findIndex((todo) => todo.id == id);
+  todo.done = true;
 
-  user.todos[todoIndex].done = true;
-
-  const todoUpdated = user.todos.find((todo) => todo.id == id);
-
-  return response.status(201).json(todoUpdated);
+  return response.status(201).json(todo);
 });
 
 app.delete("/todos/:id", checksExistsUserAccount, (request, response) => {
